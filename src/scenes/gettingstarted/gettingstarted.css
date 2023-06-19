@@ -1,0 +1,54 @@
+.gettingstarted-wrapper{
+
+}
+
+.gettingstarted-header h2{
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'Ibarra Real Nova', sans-serif;
+    font-weight: 700;
+    font-size:3rem;
+    color:#273f1c;
+    margin-top: 2rem;
+}
+.gettingstarted-header{
+    text-align: center;
+}
+
+.getting-started-btn{
+    width: 300px;
+  
+    background: #273f1c;
+    border: transparent;
+    border-radius: 50px;
+    line-height: 1rem;
+    padding:2rem 2rem;
+    color:#fff;
+    text-align: center;
+    font-size: 1.3rem;
+    cursor: pointer;
+
+}
+/* .action-buttons{
+    display: flex;
+    justify-content: ;
+    justify-items: center;
+} */
+
+@media(max-width:768px){
+    .getting-started-btn{
+        width:150px;
+        font-size: 0.7rem;
+        padding:1.5rem 1.5rem;
+
+    }
+}
+
+@media(max-width:420px){
+    .getting-started-btn{
+        width:150px;
+        font-size: 0.6rem;
+        padding:1rem 1rem;
+
+    }
+}

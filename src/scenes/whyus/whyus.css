@@ -1,0 +1,23 @@
+.whyus-wrapper{
+
+}
+
+.whyus-header{
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'Ibarra Real Nova', sans-serif;
+    font-weight: 700;
+    font-size:3rem;
+    color:#273f1c;
+    margin-top: 2rem;
+}
+
+.box-title svg{
+    color: #273f1c;
+
+}
+.box-title{
+    font-family: 'Ibarra Real Nova', sans-serif; 
+    font-weight: 700;
+    font-size: 1.4rem;
+}

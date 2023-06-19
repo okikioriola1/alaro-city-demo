@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400;0,700;1,700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.home-section{
+    margin-top: 3rem;
+}
+
+.home-wrapper{
+    display: flex;
+    margin: auto;
+    width: 83.3333%;
+    justify-items: center;
+    align-items: center;
+
+}
+
+.home-text{
+    margin-top:1rem ;
+}
+.home-header{
+    font-family: 'Ibarra Real Nova', sans-serif;
+    font-weight: 700;
+    font-size:3rem;
+    color:#273f1c;
+
+}
+.home-text-p{
+    font-family: 'Poppins', sans-serif;
+    margin: 1rem 0 2rem 0;
+    line-height: 27px;
+
+}
+
+.home-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+.home-img-div img{
+    /* width:500px;
+    height:300px; */
+}
+.home-btn{
+    width: 200px;
+    display: block;
+    text-align: center;
+    border: transparent;
+    border-radius: 50px;
+    background-color: #273f1c;
+    padding:1rem;
+    color: #fff;
+    cursor: pointer;
+    
+}
