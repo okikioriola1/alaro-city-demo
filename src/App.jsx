@@ -5,6 +5,7 @@ import Home from './scenes/home'
 import {  Route, Routes } from 'react-router-dom'
 import Electricity from './scenes/electricity';
 import Water from './scenes/water';
+import Utilities from './scenes/utilities';
 
 function App() {
   const [selectedPage, setSelectedPage] = useState("home");
@@ -18,8 +19,8 @@ function App() {
        <Route path="/" element={<Home selectedPage={selectedPage} setSelectedPage={setSelectedPage} />}/>
       
        
-       <Route path="/electricity" element ={<Electricity/>}/>
-       <Route path="/water" element ={<Water/>}/>
+       <Route path="/utilities" element ={<Utilities/>}/>
+       {/* <Route path="/water" element ={<Water/>}/> */}
        </Routes>
 
        

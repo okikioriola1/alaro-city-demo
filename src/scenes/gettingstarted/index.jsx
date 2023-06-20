@@ -14,8 +14,8 @@ const GettingStarted = ({selectedPage, setSelectedPage}) => {
                 <p className='mt-8'> Let's get you your electicity tokens and water tokens in simple steps.</p>
                 </div>
                 <div className='action-buttons flex justify-center gap-12 md:gap-28  w-5/6 mx-auto my-12'>
-                    <Link to="/electricity" className='getting-started-btn'>Buy Electricity</Link>
-                    <Link to="/water" className='getting-started-btn'>Buy Water</Link>
+                    <Link to="/utilities" className='getting-started-btn'>Buy Electricity</Link>
+                    <Link to="/utilities" className='getting-started-btn'>Buy Water</Link>
 
                 </div>
             </div>
