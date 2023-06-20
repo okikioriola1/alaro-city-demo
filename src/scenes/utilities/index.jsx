@@ -3,7 +3,7 @@ import './utilities.css'
 import {Alert, Steps} from 'antd'
 import { useEffect } from 'react'
 import { usePaystackPayment } from 'react-paystack';
-import { LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined, CopyOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import { Navigate, useNavigate } from 'react-router-dom';
 
@@ -169,9 +169,13 @@ const ShowOrder =(onReviewSubmit, onVerify, setCurrent, current)=>{
     )
 
     const SuccessMessage=(
+        <div className='flex items-center justify-items-center mt-3 gap-3'>
+
          <p className='success-message'>
-            Here's your token : 1703994652167281
+            Here's your token : 1703994652167281 
          </p>
+         <CopyOutlined />
+        </div>
     )
     const getAllUsers = () => {
         return new Promise((resolve, reject) => {
