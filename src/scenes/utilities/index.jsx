@@ -141,7 +141,7 @@ const PickUtility=({getOrderDetails, setGetOrderDetails, onSubmit})=>{
                 <input className={inputStyles} name="phone" placeholder="Phone Number" type="text" value={getOrderDetails.phone} onChange={handleChange}/>
                 {getOrderDetails?.phone.length === 11  ? (<p className='mt-[-20px] flex justify-end'>Customer Name: Alvative</p>) : getOrderDetails?.phone.length > 0 ? (<div className='mt-[-15px] flex justify-end'><Spin indicator={antIcon}/></div>):(<></>) }
                 <label> Meter Number</label>
-                <input className={inputStyles} disabled={getOrderDetails?.phone.length === 11 ? false:true} name="meterNo" placeholder="Meter Number" type="text" value={getOrderDetails.meterNo} onChange={handleChange}/>
+                <input className={inputStyles} disabled={getOrderDetails?.phone.length === 11 ? false:true} name="meterNo" placeholder="Meter Number" type="text" value={getOrderDetails?.phone.length === 11 ? "12345635":''} onChange={handleChange}/>
                 
 
 
