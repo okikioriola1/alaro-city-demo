@@ -27,3 +27,12 @@
     padding: 2rem 0;
     border-bottom: 1px solid #e0e0e0;
 }
+.success-message{
+        
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+ 
+    margin-top: 1rem;
+
+}

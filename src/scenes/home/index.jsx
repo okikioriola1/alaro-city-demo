@@ -7,6 +7,7 @@ import GettingStarted from '../gettingstarted';
 import Footer from '../footer';
 import ScrollLink from '../navbar/ScrollLink';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
+import { Link } from 'react-router-dom';
 
 const Home = ({selectedPage, setSelectedPage}) => {
     const isAboveMediumScreens = useMediaQuery("(min-width:1060px)");
@@ -17,7 +18,7 @@ const Home = ({selectedPage, setSelectedPage}) => {
                 <h2 className='font-ibarraRealNova home-header'>Provide Electricity and Water for your homes</h2>
                 <p className='font-poppins home-text-p'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat delectus consequatur quasi hic soluta consequuntur eius consectetur quod, voluptatibus iste deleniti id, tenetur ullam at quia. Odit praesentium odio commodi.</p>
 
-                <AnchorLink href="#getstarted" className='home-btn'>Buy Utilities</AnchorLink>
+                <Link to="/utilities" className='home-btn'>Buy Utilities</Link>
             </div>
 
 

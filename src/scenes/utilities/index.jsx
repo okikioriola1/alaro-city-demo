@@ -1,13 +1,18 @@
 import React, {useState} from 'react'
 import './utilities.css'
-import {Steps} from 'antd'
+import {Alert, Steps} from 'antd'
 import { useEffect } from 'react'
 import { usePaystackPayment } from 'react-paystack';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
+import { Navigate, useNavigate } from 'react-router-dom';
+
 
 
 
 
 const Utilities = () => {
+
     const [current, setCurrent] = useState(0)
     const [getOrderDetails, setGetOrderDetails]= useState({
         utility:"", phone:"", meterNo:"",amount:0
@@ -29,23 +34,24 @@ const Utilities = () => {
     }
     const displayPage = [
         <PickUtility getOrderDetails={getOrderDetails} setGetOrderDetails={setGetOrderDetails} onSubmit={onSubmitOrder} />,
-        <ShowOrder onReviewSubmit={onSubmitReview} onVerify={onVerifyPayment} setCurrent={setCurrent}/>,
-        <VerifyPayment/>
+        <ShowOrder onReviewSubmit={onSubmitReview} onVerify={onVerifyPayment} setCurrent={setCurrent} current={current} getOrderDetails={getOrderDetails}/>,
+        
 
     ];
-    console.log(current)
+    
 
 
     return(
     <div className=''>
-        <Steps style={{padding: "3rem 4rem"}} onChange={setCurrent} current={current}>
-            <Steps.Step title="Order Utility" />
-            <Steps.Step title="Review Order" />
-            <Steps.Step title="Payment Information" />
-            <Steps.Step title="Complete Order" />
+        <Steps style={{padding: "3rem 4rem"}} onChange={setCurrent} current={current} type="navigation">
+            <Steps.Step title="Utility Order" />
+            <Steps.Step title="Submit Order" />
+            {/* <Steps.Step title="Payment Information" /> */}
+            {/* <Steps.Step title="Complete Order" /> */}
         </Steps>
 
         {displayPage[current]}
+
     
     </div>
         
@@ -62,6 +68,16 @@ const PickUtility=({getOrderDetails, setGetOrderDetails, onSubmit})=>{
          label:"Buy Electricity"},
 
     ]
+    const [limit, setLimit] = useState(0)
+    const [checkDisabled, setCheckDisabled] =useState(true)
+    const antIcon = (
+        <LoadingOutlined
+          style={{
+            fontSize: 24,
+          }}
+          spin
+        />
+      );
    
     // const [utility, setUtility]= useState("")
     // const [phone, setPhone]= useState("")
@@ -80,7 +96,19 @@ const PickUtility=({getOrderDetails, setGetOrderDetails, onSubmit})=>{
             setGetOrderDetails((orderDetails) => ({ ...orderDetails, [name]: parseInt(value)*100 }));
 
         }
-        setGetOrderDetails((orderDetails) => ({ ...orderDetails, [name]: value }));
+        if(name==="phone"){
+            setLimit(11)
+            setGetOrderDetails((orderDetails) => ({ ...orderDetails, [name]: value.slice(0, limit) }));
+            
+        }
+        if(checkDisabled===false && name==="meterNo"){
+            setGetOrderDetails((orderDetails) => ({ ...orderDetails, [name]: 1233343}));
+
+        }
+        else{
+
+            setGetOrderDetails((orderDetails) => ({ ...orderDetails, [name]: value }));
+        }
         
       };
 
@@ -89,6 +117,7 @@ const PickUtility=({getOrderDetails, setGetOrderDetails, onSubmit})=>{
     //     setUtility(e.target.value)
         
     // }
+
     
   return (
     
@@ -106,13 +135,15 @@ const PickUtility=({getOrderDetails, setGetOrderDetails, onSubmit})=>{
                
                 
                 </select>
-                <label>Phone Number</label>
-                <input className={inputStyles} name="phone" placeholder="Phone Number" type="text" value={getOrderDetails.phone} onChange={handleChange}/>
-                <label> Meter Number</label>
-                <input className={inputStyles} name="meterNo" placeholder="Meter Number" type="text" value={getOrderDetails.meterNo} onChange={handleChange}/>
-                
                 <label>Amount</label>
                 <input className={inputStyles} name="amount" placeholder="Amount" type="number" value={getOrderDetails.amount} onChange={handleChange}/>
+                <label>Phone Number</label>
+                <input className={inputStyles} name="phone" placeholder="Phone Number" type="text" value={getOrderDetails.phone} onChange={handleChange}/>
+                {getOrderDetails?.phone.length === 11  ? (<p className='mt-[-20px] flex justify-end'>Customer Name: Alvative</p>) : getOrderDetails?.phone.length > 0 ? (<div className='mt-[-15px] flex justify-end'><Spin indicator={antIcon}/></div>):(<></>) }
+                <label> Meter Number</label>
+                <input className={inputStyles} disabled={getOrderDetails?.phone.length === 11 ? false:true} name="meterNo" placeholder="Meter Number" type="text" value={getOrderDetails.meterNo} onChange={handleChange}/>
+                
+
 
                 <button className='pay-button bg-[#273f1c]' type="submit">Proceed to Order</button>
                 
@@ -124,9 +155,24 @@ const PickUtility=({getOrderDetails, setGetOrderDetails, onSubmit})=>{
   )
 }
 
-const ShowOrder =(onReviewSubmit, onVerify, setCurrent)=>{
+const ShowOrder =(onReviewSubmit, onVerify, setCurrent, current)=>{
+    
     const [transaction, setTransaction]= useState({})
     const [orderData, setOrderData] = useState({})
+    const [showSuccess, setShowSuccess] = useState(false)
+    const navigate = useNavigate()
+    const Success =(
+        <Alert  message="Success Tips"
+        description="Detailed description and advice about successful copywriting."
+        type="success"
+        showIcon/>
+    )
+
+    const SuccessMessage=(
+         <p className='success-message'>
+            Here's your token : 1703994652167281
+         </p>
+    )
     const getAllUsers = () => {
         return new Promise((resolve, reject) => {
           setTimeout(resolve({
@@ -136,7 +182,7 @@ const ShowOrder =(onReviewSubmit, onVerify, setCurrent)=>{
               { name: "Okiki", email:"alvative@alvative.com", phone:"0803445678",meterNo:"555444376", amount:200000 },
             
             ]
-          }), Math.random() * 1000)
+          }), Math.random() * 3000)
         })
       }
       const getTheDetails= async ()=>{
@@ -159,28 +205,49 @@ const ShowOrder =(onReviewSubmit, onVerify, setCurrent)=>{
     // you can call this function anything
     const onSuccess = (reference) => {
       // Implementation for whatever you want to do with reference and after success call.
-      console.log(reference);
+      
       setTransaction(reference)
+      setShowSuccess(true)
+      console.log(reference);
       setCurrent(2)
       onVerify(reference);
-
+      console.log(current)
+      
+      
+      
+   
+     
+ 
      
 
 
     };
+    console.log(transaction)
+   
   
     // you can call this function anything
     const onClose = () => {
       // implementation for  whatever you want to do when the Paystack dialog closed.
       console.log('closed')
+      navigate('/utilities')
     }
 
     const initializePayment = usePaystackPayment(config);
 
       return(
         <div className="w-full mx-auto gap-5 md:pl-40 py-3">
-        <div className="md:w-1/2 px-8">
-          <div className="data-items">
+        <div className="md:w-5/6 px-8">
+            <div className=''>
+                {showSuccess && (
+              <Alert  message="Payment Succeessful"
+                      description={SuccessMessage}
+                      type="success"
+                      showIcon/>
+
+                )}
+
+            </div>
+         <div className="data-items">
             <p className="font-semibold">Customer Name</p>
             <p>{orderData?.name}</p>
           </div>
